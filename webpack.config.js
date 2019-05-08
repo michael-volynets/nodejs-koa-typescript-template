@@ -15,8 +15,8 @@ module.exports = (env) => {
         entry: './src/server.ts',
         target: 'node',
         node: {
-          __dirname: false,   // if you don't put this is, __dirname
-          __filename: false,  // and __filename return blank or /
+          __dirname: false,   
+          __filename: false
         },
         mode: NODE_ENV,
         output: {
@@ -29,7 +29,8 @@ module.exports = (env) => {
         },
         plugins: [
           new CopyPlugin([
-            { from: `./environments/.env.${NODE_ENV}`, to: '.env', toType: 'template' }
+            { from: `./environments/.env.${NODE_ENV}`, to: '.env', toType: 'template' },
+            { from: './src/static', to: './static' }
           ])  
         ],
         module: {
