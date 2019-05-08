@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "test": "jest --forceExit --coverage --verbose",
     "build:dev": "rm -rf ./dist && ./node_modules/.bin/webpack --env.NODE_ENV=development",
     "build:prod": "rm -rf ./dist && ./node_modules/.bin/webpack --env.NODE_ENV=production",
     "start": "node ./dist/bundle.js"
@@ -20,11 +21,16 @@
     "@types/koa": "^2.0.45",
     "@types/koa-router": "^7.0.40",
     "@types/koa-static": "^4.0.0",
+    "@types/jest": "^24.0.12",
+    "@types/supertest": "^2.0.7",
     "copy-webpack-plugin": "^5.0.3",
     "ts-loader": "^6.0.0",
     "typescript": "^3.4.5",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.2",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "supertest": "^4.0.2"
   }
 }
