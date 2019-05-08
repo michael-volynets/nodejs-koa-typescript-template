@@ -3,18 +3,26 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build:dev": "rm -rf ./dist && ./node_modules/.bin/tsc",
-    "start:dev": "node ./dist/server.js"
+    "build:dev": "rm -rf ./dist && ./node_modules/.bin/webpack --env.NODE_ENV=development",
+    "build:prod": "rm -rf ./dist && ./node_modules/.bin/webpack --env.NODE_ENV=production",
+    "start": "node ./dist/bundle.js"
   },
   "dependencies": {
+    "dotenv": "^8.0.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
-    "koa-router": "^7.4.0",
-    "jsonwebtoken": "^8.5.1"
+    "koa-router": "^7.4.0"
   },
   "devDependencies": {
-    "typescript": "^3.4.5",
+    "@types/dotenv": "^4.0.3",
+    "@types/jsonwebtoken": "^7.2.7",
     "@types/koa": "^2.0.45",
     "@types/koa-router": "^7.0.40",
-    "@types/jsonwebtoken": "^7.2.7"
+    "copy-webpack-plugin": "^5.0.3",
+    "ts-loader": "^6.0.0",
+    "typescript": "^3.4.5",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-node-externals": "^1.7.2"
   }
 }
