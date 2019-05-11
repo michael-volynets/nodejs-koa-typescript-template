@@ -5,7 +5,7 @@
     "tasks": [
         {
             "label": "build",
-            "command": "yarn run build",
+            "command": "yarn run build:dev",
             "type": "shell",
             "group": "build"
         }

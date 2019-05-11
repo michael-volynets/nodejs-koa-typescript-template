@@ -1,17 +1,22 @@
 import Koa from "koa";
-import Router from "koa-router";
 import Serve from "koa-static";
-import path from "path";
+import Path from "path";
+import Mongoose from "mongoose";
+import Environment from "./config/environment";
+import BodyParser from "koa-bodyparser";
+import Router from "./routes";
 
 const app = new Koa();
-const router = new Router();
 
-app.use(Serve(path.resolve(__dirname, 'static')));
+app.use(BodyParser());
+app.use(Serve(Path.resolve(__dirname, 'static')));
 
-router.get('/', ctx => {
-    ctx.body = "<h1>Hello World!</h1>"
-});
+Mongoose.connect(Environment.mongoConnectionString, { useNewUrlParser: true });
 
-app.use(router.routes());  
+if (Environment.isDevelopment()) {
+    Mongoose.set('debug', true);
+}
+
+app.use(Router.routes());
 
 export default app;

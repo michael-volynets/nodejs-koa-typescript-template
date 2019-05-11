@@ -5,5 +5,9 @@ dotenv.config({path: path.resolve(__dirname, '.env')});
 
 export default {
     name: process.env.NODE_ENV,
-    port: process.env.PORT
+    port: process.env.PORT,
+    mongoConnectionString: process.env.MONGO_CONNECTION,
+    isDevelopment: (): boolean => {
+        return process.env.NODE_ENV === 'development';
+    }
 }
