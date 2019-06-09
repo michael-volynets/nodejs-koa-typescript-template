@@ -32,7 +32,7 @@ app.use(async (ctx, next) => {
 if (Environment.isDevelopment()) {
     Mongoose.set('debug', true);
 
-    // Show Stack trace
+    // Show Stack Trace if it's 'development' mode.
     app.on('error', (err, ctx) => {
         ctx.body += 'Stack Trace:\n' + err.stack;
     });

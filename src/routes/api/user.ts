@@ -1,15 +1,8 @@
-import Router, { RouterContext } from "koa-router";
-import UserService from "../../services/user.service";
-import { ApiError } from "../../base/APIError";
+import Router from "koa-router";
+import Ctrl from "../../controllers";
 
 const router = new Router();
 
-const createUser = async (ctx: RouterContext) => {
-    const result = await UserService.createUser(ctx.request.body);
-
-    ctx.body = result;
-}
-
-router.post('/', createUser);
+router.post('/', Ctrl.Users.post);
 
 export default router;
