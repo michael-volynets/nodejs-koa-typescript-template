@@ -62,12 +62,7 @@ module.exports = (env) => {
         case 'development':
           config = Object.assign(baseConfiguration, {
               devtool: 'source-map',
-              externals: [nodeExternals()],
-              optimization: {
-                splitChunks: {
-                  chunks: 'all',
-                }
-              }
+              externals: [nodeExternals()]
           });
           break;
         case 'production':

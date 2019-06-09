@@ -6,8 +6,11 @@ import Environment from "./config/environment";
 import BodyParser from "koa-bodyparser";
 import Router from "./routes";
 import ErrorMiddleware from "./middleware/error.middleware";
+import KoaResponseTime from "koa-response-time";
 
 const app = new Koa();
+
+app.use(KoaResponseTime()); // To know time elapsed, when request entered and until the server sent a response
 
 app.use(BodyParser());
 app.use(Serve(Path.resolve(__dirname, "static")));
