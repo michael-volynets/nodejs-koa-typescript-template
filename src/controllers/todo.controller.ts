@@ -15,7 +15,7 @@ const getMany = async (ctx: RouterContext) => {
     if (ctx.request.query.skip) {
         const parsed = Number.parseInt(ctx.request.query.skip);
 
-        if (typeof parsed === 'number') {
+        if (typeof parsed === "number") {
             skip = parsed;
         }
     }
@@ -23,11 +23,11 @@ const getMany = async (ctx: RouterContext) => {
     if (ctx.request.query.limit) {
         const parsed = Number.parseInt(ctx.request.query.limit);
 
-        if (typeof parsed === 'number') {
+        if (typeof parsed === "number") {
             limit = parsed;
         }
     }
-    
+
     ctx.body = await Todo
         .find()
         .skip(skip)

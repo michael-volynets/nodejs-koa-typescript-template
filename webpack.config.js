@@ -12,7 +12,7 @@ module.exports = (env) => {
     }
 
     const baseConfiguration = {
-        entry: './src/server.ts',
+        entry: path.resolve('./src/server.ts'),
         target: 'node',
         node: {
           __dirname: false,   
@@ -36,6 +36,17 @@ module.exports = (env) => {
         module: {
             rules: [
                 {
+                  enforce: 'pre',
+                  test: /\.js$/,
+                  use: 'source-map-loader'
+                },
+                {
+                  enforce: 'pre',
+                  test: /\.ts$/,
+                  exclude: /node_modules/,
+                  use: 'tslint-loader'
+                },
+                {
                   test: /\.ts$/,
                   use: [
                     'ts-loader',
@@ -49,14 +60,19 @@ module.exports = (env) => {
 
     switch (NODE_ENV) {
         case 'development':
-        config = Object.assign(baseConfiguration, {
-            devtool: 'source-map',
-            externals: [nodeExternals()]
-        });
-        break;
+          config = Object.assign(baseConfiguration, {
+              devtool: 'source-map',
+              externals: [nodeExternals()],
+              optimization: {
+                splitChunks: {
+                  chunks: 'all',
+                }
+              }
+          });
+          break;
         case 'production':
-        // TODO: Production Build
-        config = baseConfiguration;
+          // TODO: Production Build
+          config = baseConfiguration;
         break;
         default: 
         throw new Error(`There is no such configuration (${NODE_ENV})`)
