@@ -1,6 +1,9 @@
 
 # NodeJS Koa Back-End Architecture
 This is a template for the future NodeJS projects
-
-    // TODO:
-    // #1 Finish Writing a Readme.md
+## Todo
+ - [ ] Add Data Validation
+ - [ ] JWT token generation
+ - [ ] Swagger UI
+ - [ ] Email Sending
+ - [ ] Forgot/Reset pasword
