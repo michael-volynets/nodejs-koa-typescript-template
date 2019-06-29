@@ -1,5 +1,6 @@
 import Koa from "koa";
 import Serve from "koa-static";
+import KoaPassport from "koa-passport";
 import Path from "path";
 import Mongoose from "mongoose";
 import Environment from "./config/environment";
@@ -10,15 +11,17 @@ import KoaResponseTime from "koa-response-time";
 
 const app = new Koa();
 
-app.use(KoaResponseTime()); // To know time elapsed, when request entered and until the server sent a response
-
 app.use(BodyParser());
 app.use(Serve(Path.resolve(__dirname, "static")));
+
+app.use(KoaResponseTime()); // To know time elapsed, when request entered and until the server sent a response
 
 Mongoose.connect(Environment.mongoConnectionString, { useNewUrlParser: true });
 
 // General Exception Handler
-app.use(ErrorMiddleware.middleware);
+app.use(ErrorMiddleware());
+
+app.use(KoaPassport.initialize());
 
 if (Environment.isDevelopment()) {
     Mongoose.set("debug", true);

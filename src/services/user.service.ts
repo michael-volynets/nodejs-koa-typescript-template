@@ -2,6 +2,7 @@ import Bcrypt from "bcrypt";
 import User, { IUser } from "../models/User";
 import { ApiError } from "../base/APIError";
 import StatusCodes from "http-status-codes";
+import environment from "../config/environment";
 
 const createUser = async (userViewModel: any) => {
     const result = await User.findOne({ email: userViewModel.email });

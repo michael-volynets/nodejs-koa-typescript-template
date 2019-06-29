@@ -1,8 +1,7 @@
 import { ParameterizedContext } from "koa";
 import { ApiError } from "../base/APIError";
 
-export default {
-    middleware: async (ctx: ParameterizedContext<any, {}>, next: () => Promise<any>) => {
+export default () => async (ctx: ParameterizedContext<any, {}>, next: () => Promise<any>) => {
         try {
             await next();
         } catch (error) {
@@ -19,6 +18,5 @@ export default {
             };
             ctx.app.emit("error", error, ctx);
         }
-    }
-};
+    };
 
