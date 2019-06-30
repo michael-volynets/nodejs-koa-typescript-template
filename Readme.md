@@ -1,7 +1,7 @@
 
 ## Todo
  -  Add Data Validation
- -  JWT token generation
+ -  JWT generation
  -  Swagger UI
  -  Email Sending
  -  Forgot/Reset pasword
