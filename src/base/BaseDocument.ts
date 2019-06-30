@@ -1,40 +1,25 @@
-import { Document, Schema, SchemaOptions, SchemaDefinition } from "mongoose";
-import Lodash from "lodash";
+import Mongoose from "mongoose";
+import { Typegoose, pre, prop, GetModelForClassOptions } from "typegoose";
+import { ObjectId } from "bson";
 
-export interface BaseDocument extends Document {
-    createdAt: Date;
-    updatedAt: Date;
-    isDocumentDeleted: boolean;
-}
-
-export class BaseSchema extends Schema {
-    constructor(definition?: SchemaDefinition, options?: SchemaOptions) {
-        super(definition, Lodash.extend(options, { timestamps: true }));
-        this.ConfigureSchema();
+@pre<BaseDocument>("save", function(next) {
+    if (typeof this.isDocumentDeleted === "undefined") {
+        this.isDocumentDeleted = false;
     }
+    next();
+})
+export class BaseDocument extends Typegoose {
+    @prop()
+    _id: ObjectId;
+    @prop()
+    createdAt?: Date;
+    @prop()
+    updatedAt?: Date;
+    @prop()
+    isDocumentDeleted?: boolean;
 
-    private ConfigureSchema() {
-        this.add({
-            createdAt: {
-                type: Date,
-                required: false
-            },
-            updatedAt: {
-                type: Date,
-                required: false
-            },
-            isDocumentDeleted: {
-                type: Boolean,
-                required: false
-            }
-        });
-
-        this.pre("save", function (next) {
-            const baseDocument = <BaseDocument>this;
-            if (typeof baseDocument.isDocumentDeleted === "undefined") {
-                baseDocument.isDocumentDeleted = false;
-            }
-            next();
-        });
+    constructor() {
+        super();
+        this.setModelForClass(this, { schemaOptions: { timestamps: true} });
     }
 }

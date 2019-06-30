@@ -1,20 +1,16 @@
-import Mongoose, { Schema, Document } from "mongoose";
-import { BaseSchema, BaseDocument } from "../base/BaseDocument";
+import { BaseDocument } from "../base/BaseDocument";
+import { prop } from "typegoose";
+import Bcrypt from "bcrypt";
 
-export interface IUser extends BaseDocument {
+export class User extends BaseDocument {
+    @prop({ required: true, unique: true })
     email: string;
+    @prop({ required: true })
     firstName: string;
+    @prop({ required: true })
     lastName: string;
-    password: string;
+    @prop()
     passwordHash: string;
 }
 
-const UserSchema = new BaseSchema({
-    email: { type: String,  required: true },
-    firstName: { type: String,  required: true },
-    lastName: { type: String,  required: true },
-    passwordHash: String
-});
-
-
-export default Mongoose.model<IUser>("User", UserSchema);
+export default new User().getModelForClass(User);

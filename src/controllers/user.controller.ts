@@ -7,6 +7,13 @@ const post = async (ctx: RouterContext) => {
     ctx.body = result;
 };
 
+const get = async(ctx: RouterContext) => {
+    const result = await userService.getUsers(Number(ctx.query.skip), Number(ctx.query.limit));
+
+    ctx.body = result;
+};
+
 export default {
-    post
+    post,
+    get
 };
